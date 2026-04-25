@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .venv/
 brief_*.md
+value_case_*.md
