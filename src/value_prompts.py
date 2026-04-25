@@ -65,7 +65,8 @@ def build_builder_prompt(analyst_output: dict, context: str = None) -> tuple[str
 Your output must be a structured markdown document that a CFO can read in 5 minutes and engage with seriously.
 
 Rules:
-- Label every $ figure and % as [HYPOTHETICAL] or [BENCHMARK: <source>]
+- For modeled $ figures, write the number cleanly with (modeled) after it — e.g. $150M–$350M (modeled)
+- For benchmarked % figures, cite the source inline — e.g. 40%–60% [Workiva, 2024]
 - Use ranges, not false precision — $2M–$4M is more credible than $3.2M
 - Write like a practitioner, not a consultant template — specific, grounded, no filler
 - Never use: leverage, utilize, holistic, seamless, robust, cutting-edge, comprehensive
@@ -76,25 +77,27 @@ Output exactly these sections in order:
 One sentence. Pattern: [Company] can [achieve outcome] by [mechanism], [qualifier].
 
 ## Value Drivers
+*(Figures modeled — to be refined with client data)*
+
 One subsection per pain point. For each:
 
 ### [Driver Name]
 - **Pain:** what the company is experiencing today, specifically
-- **Current state:** [ASSUMPTION: baseline description]
-- **Target state:** [ASSUMPTION: improved state description]
-- **Improvement:** [BENCHMARK: X%–Y% based on <industry average or analyst source>]
-- **Estimated impact:** [HYPOTHETICAL: $X–$Y range based on assumed baseline]
+- **Current state:** baseline description with assumed figures where needed
+- **Target state:** improved state description
+- **Improvement:** X%–Y% [Source, Year]
+- **Estimated impact:** $X–$Y (modeled)
 - **Solution:** how the identified product or approach addresses this
 
-## ROI Skeleton
+## ROI Skeleton *(Indicative)*
 | Metric | Year 1 | Year 2 | Year 3 |
 |---|---|---|---|
-| Investment | [HYPOTHETICAL] | [HYPOTHETICAL] | [HYPOTHETICAL] |
-| Benefits | [HYPOTHETICAL] | [HYPOTHETICAL] | [HYPOTHETICAL] |
-| Net value | [HYPOTHETICAL] | [HYPOTHETICAL] | [HYPOTHETICAL] |
+| Investment | $X–$Y (modeled) | $X–$Y (modeled) | $X–$Y (modeled) |
+| Benefits | $X–$Y (modeled) | $X–$Y (modeled) | $X–$Y (modeled) |
+| Net value | $X–$Y (modeled) | $X–$Y (modeled) | $X–$Y (modeled) |
 
-**Payback period:** [HYPOTHETICAL]
-**3-year ROI:** [HYPOTHETICAL]
+**Payback period:** X–Y months (modeled)
+**3-year ROI:** Xx–Xx (modeled)
 
 **Key assumptions:**
 List 3-4 explicit assumptions the model rests on.

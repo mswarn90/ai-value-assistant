@@ -50,15 +50,17 @@ def run_builder(analyst_output: dict, context: str = None) -> str:
 
 
 def save_value_case(company: str, content: str) -> str:
-    date_str = datetime.now().strftime("%d-%b-%Y").lower()
+    d = datetime.now()
+    date_str = f"{d.day}-{d.strftime('%b').lower()}-{d.year}"
+    display_date = f"{d.day} {d.strftime('%b')} {d.year}"
     clean_name = company.strip('"\'').lower().replace(' ', '-')
-    filename = f"value_case_{clean_name}_{date_str}.md"
+    filename = f"value-case-{clean_name}-{date_str}.md"
     output_path = os.path.join(os.path.dirname(__file__), "..", filename)
     output_path = os.path.normpath(output_path)
 
     with open(output_path, "w") as f:
         f.write(f"# Value Case: {company}\n")
-        f.write(f"*Generated: {datetime.now().strftime('%d %b %Y')}*\n\n")
+        f.write(f"*Generated: {display_date}*\n\n")
         f.write(content)
     return output_path
 

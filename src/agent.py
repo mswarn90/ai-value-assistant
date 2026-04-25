@@ -64,17 +64,19 @@ def run_research(company: str, industry: str, focus: str = None) -> str:
 
 
 def save_brief(company: str, industry: str, brief: str, focus: str = None) -> str:
-    date_str = datetime.now().strftime("%d-%b-%Y").lower()
+    d = datetime.now()
+    date_str = f"{d.day}-{d.strftime('%b').lower()}-{d.year}"
+    display_date = f"{d.day} {d.strftime('%b')} {d.year}"
     clean_name = company.strip('"\'').lower().replace(' ', '-')
-    focus_slug = f"_{focus.lower().replace(' ', '-')}" if focus else ""
-    filename = f"brief_{clean_name}{focus_slug}_{date_str}.md"
+    focus_slug = f"-{focus.lower().replace(' ', '-')}" if focus else ""
+    filename = f"brief-{clean_name}{focus_slug}-{date_str}.md"
     output_path = os.path.join(os.path.dirname(__file__), "..", filename)
     output_path = os.path.normpath(output_path)
 
     focus_line = f"\n*Focus: {focus}*" if focus else ""
     with open(output_path, "w") as f:
         f.write(f"# Research Brief: {company} ({industry})\n")
-        f.write(f"*Generated: {datetime.now().strftime('%d %b %Y')}*{focus_line}\n\n")
+        f.write(f"*Generated: {display_date}*{focus_line}\n\n")
         f.write(brief)
     return output_path
 
